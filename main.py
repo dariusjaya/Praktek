@@ -9,6 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 from modelview.view_pasien import PasienModelView
 from modelview.view_diagnosa import DiagnosaModelView
 import os
+from flask import Flask, redirect, url_for
 
 
 # Flask-Admin setup
@@ -23,6 +24,10 @@ os.environ['BASE_PATH'] = os.path.abspath(os.getcwd())
 admin.add_view(PasienModelView(Pasien, db.session))
 admin.add_view(DiagnosaModelView(Diagnosa, db.session))
 
+
+@app.route('/')
+def index():
+    return redirect(url_for('admin.index'))
 
 
 if __name__ == '__main__':
